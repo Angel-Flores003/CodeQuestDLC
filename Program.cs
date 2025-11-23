@@ -124,6 +124,26 @@ public class Program
         const string NewPowers = "Keep training to unlock new powers!";
         const string AtkFor = "Available attacks for level {0}:";
         const string AllPowers = "You already know all powers, congratulations ⭐";
+        //op7 const
+        const string EncripMsg = "You found an ancient scroll with encrypted messages!\n";
+        const string Scrool = "Scroll to decode:";
+        const string SecretCodeMenu = "  1. \"The 🐲 sleeps in the mountain of fire 🔥\"\n" +
+            "  2. \"Ancient magic flows through the crystal caves\"\n" +
+            "  3. \"Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️\"\n\n" +
+            "You must decode the following scroll:\n" +
+            "Choose a decoding operation:\n" +
+            "1. Decipher spell (remove spaces)\n" +
+            "2. Count magical runes (vowels)\n" +
+            "3. Extract secret code (numbers)";
+        const string DecipheSpell = "Deciphered Spell: ";
+        const string DragonSleep = "The 🐲 sleeps in the mountain of fire 🔥";        
+        const string MagicVowel = "{0} magical runes (vowels) found";
+        const string MagiCave = "Ancient magic flows through the crystal caves";
+        const string Scan = "Scanning: ...";
+        const string DecodeNumber = "🔮 Decoded number: ";
+        const string Spell = "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️";
+        const string Error2 = "Invalid input. Please enter a number between 0 and 3.";
+        const string ThreeOfThree = "Congratulations! You have successfully decoded all parts of the scroll.";
         //op1 var
         Random rand = new Random();
         int power = 0, hours = 0, op = -1, lvl = 1;
@@ -160,6 +180,10 @@ public class Program
         string[] level3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
         string[] level4 = { "Wave of Light ⚜️", "Storm of Wings 🐦" };
         string[] level5 = { "Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" };
+        //op7 var
+        int msgOp, vowelCount = 0;
+        bool codeMsg1 = false, codeMsg2 = false, codeMsg3 = false;
+        string noSpaces = "";
         do
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -888,7 +912,65 @@ public class Program
                                 Console.WriteLine(AllPowers);
                             break;
                         }
-                    break;                    
+                    break;
+                    case 7:
+                        try
+                        {
+                            Console.WriteLine(EncripMsg);
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(Scrool);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(SecretCodeMenu);
+                            msgOp = Int32.Parse(Console.ReadLine());
+                            switch (msgOp)
+                            {
+                                case 1:
+                                    Console.Write(DecipheSpell);
+                                    noSpaces = DragonSleep.Replace(" ", "");
+                                    Console.WriteLine(noSpaces);
+                                    codeMsg1 = true;
+                                break;
+                                case 2:
+                                    foreach (char vowel in MagiCave)
+                                    {
+                                        if ("aeiouAEIOUáéíóúàèìòùAÉÍÓÚÀÈÌÒÙ".Contains(vowel))
+                                        {
+                                            vowelCount++;
+                                        }
+                                    }
+                                    Console.WriteLine(MagicVowel, vowelCount);
+                                    codeMsg2 = true;
+                                break;
+                                case 3:
+                                    Console.WriteLine(Scan);
+                                    Thread.Sleep(1000);
+                                    Console.Write(DecodeNumber);
+                                    foreach (char num in Spell)
+                                    {
+                                        if ("1234567890".Contains(num))
+                                        {
+                                            Console.Write(num);
+                                        }
+                                    }
+                                    Console.WriteLine("");
+                                    codeMsg3 = true;
+                                break;
+                                default:
+                                    Console.WriteLine(Error2);
+                                break;
+                            }
+                            if (codeMsg1 && codeMsg2 && codeMsg3)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine(ThreeOfThree);
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine(Error2);
+                        }
+                    break;
                 }
             }
             catch (FormatException)
