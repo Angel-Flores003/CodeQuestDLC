@@ -108,7 +108,10 @@ public class Program
         const string InvaliVal = "Invalid axis. Please enter a value between 0 and 4";
         const string Mine = "You mine at position [{0}][{1}] and you get ";
         const string Bits = "{0} bits";
-        const string FailMine = "You mine at position [{0}][{1}] but found nothing.";        
+        const string FailMine = "You mine at position [{0}][{1}] but found nothing.";
+        //op4 const
+        const string EmptyInv = "Your inventory is empty.";
+        const string Inventory = "Your inventory contains:";
         //op5 const
         const string ByuItems = "You chose to buy items\n" +
             "You have {0} bits available.\n" +
@@ -135,7 +138,10 @@ public class Program
         //op3 var
         int coin = 0, count = 0, valX = 5, valY = 5, money = 0;
         string[,] map0 = new string[5, 5];
-        string[,] mapDig = new string[5, 5];       
+        string[,] mapDig = new string[5, 5];
+        //op4 var        
+        string[] inventory = { "" };
+        string[] tempInven = { "" };
         //op5 var
         int opStore = -1;
         int[] price = { 30, 10, 50, 40, 20 };
@@ -143,7 +149,7 @@ public class Program
             "Healing Potion ⚗️",
             "Ancient Key 🗝️",
             "Crossbow 🏹",
-            "Metal Shield 🛡️"};       
+            "Metal Shield 🛡️"};        
         do
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -742,7 +748,19 @@ public class Program
                             Console.WriteLine("");
                         }
                     break;                    
-                    case 4:                        
+                    case 4:
+                        if (inventory[0].Equals(""))
+                        {
+                            Console.WriteLine(EmptyInv);
+                        }
+                        else
+                        {
+                            Console.WriteLine(Inventory);
+                            foreach (string item in inventory)
+                            {
+                                Console.WriteLine($" {item}");
+                            }
+                        }
                     break;
                     case 5:
                         Console.WriteLine(ByuItems, money);
@@ -767,7 +785,16 @@ public class Program
                                         if (money > price[opStore - 1])
                                         {
                                             money -= price[opStore - 1];
-                                            Console.WriteLine(Bought, store[opStore - 1], price[opStore - 1], money);                                            
+                                            Console.WriteLine(Bought, store[opStore - 1], price[opStore - 1], money);
+                                            tempInven[0] = store[opStore - 1];
+                                            if (inventory[0].Equals(""))
+                                            {
+                                                inventory[0] = tempInven[0];
+                                            }
+                                            else
+                                            {
+                                                inventory = inventory.Concat(tempInven).ToArray();
+                                            }
                                         }
                                         else
                                         {
