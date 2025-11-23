@@ -109,6 +109,14 @@ public class Program
         const string Mine = "You mine at position [{0}][{1}] and you get ";
         const string Bits = "{0} bits";
         const string FailMine = "You mine at position [{0}][{1}] but found nothing.";        
+        //op5 const
+        const string ByuItems = "You chose to buy items\n" +
+            "You have {0} bits available.\n" +
+            "Items available for purchase:";        
+        const string OpStore = "Select the item you wish to buy (1 - 5) (0 to exit):";
+        const string ZeroExit = "0 - Exit";
+        const string Bought = "You have purchased: {0} for {1} bits. Bits remaining: {2}";
+        const string NoMoney = "You do not have enough bits to purchase this item.";        
         //op1 var
         Random rand = new Random();
         int power = 0, hours = 0, op = -1, lvl = 1;
@@ -127,7 +135,15 @@ public class Program
         //op3 var
         int coin = 0, count = 0, valX = 5, valY = 5, money = 0;
         string[,] map0 = new string[5, 5];
-        string[,] mapDig = new string[5, 5];        
+        string[,] mapDig = new string[5, 5];       
+        //op5 var
+        int opStore = -1;
+        int[] price = { 30, 10, 50, 40, 20 };
+        string[] store = { "Iron Dagger 🗡️",
+            "Healing Potion ⚗️",
+            "Ancient Key 🗝️",
+            "Crossbow 🏹",
+            "Metal Shield 🛡️"};       
         do
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -725,6 +741,46 @@ public class Program
                             }
                             Console.WriteLine("");
                         }
+                    break;                    
+                    case 4:                        
+                    break;
+                    case 5:
+                        Console.WriteLine(ByuItems, money);
+                        do
+                        {                            
+                            for (int i = 0; i < store.GetLength(0); i++)
+                            {
+                                Console.Write($"{i + 1} - {store[i]} ");
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"Price: {price[i]}");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                            Console.WriteLine(ZeroExit);
+                            do
+                            {
+                                Console.WriteLine(OpStore);
+                                opStore = Int32.Parse(Console.ReadLine());
+                                try
+                                {
+                                    if (opStore != 0)
+                                    {
+                                        if (money > price[opStore - 1])
+                                        {
+                                            money -= price[opStore - 1];
+                                            Console.WriteLine(Bought, store[opStore - 1], price[opStore - 1], money);                                            
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine(NoMoney);
+                                        }
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine(Error);
+                                }
+                            } while (opStore < 0 || opStore > 5);
+                        } while (opStore != 0);
                     break;                    
                 }
             }
