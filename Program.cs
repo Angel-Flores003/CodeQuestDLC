@@ -95,7 +95,20 @@ public class Program
         const string Key = "Press any key to roll the dice again...";
         const string Defeat = "The {0} has been defeated!";
         const string LevlUp = "{0} levels up!";
-        const string LvlMax = "You already have the max level";        
+        const string LvlMax = "You already have the max level";
+        //op3 const
+        const int MaxAtt = 5;
+        const string Empty = "➖";
+        const string Coin = "\U0001fa99";
+        const string Fail = "❌";
+        const string Attempts = "You have 5 attempts to mine for bits.";
+        const string Column = "  0 1 2 3 4";
+        const string InsertX = "Insert the x axis:";
+        const string InsertY = "Insert the y axis:";
+        const string InvaliVal = "Invalid axis. Please enter a value between 0 and 4";
+        const string Mine = "You mine at position [{0}][{1}] and you get ";
+        const string Bits = "{0} bits";
+        const string FailMine = "You mine at position [{0}][{1}] but found nothing.";        
         //op1 var
         Random rand = new Random();
         int power = 0, hours = 0, op = -1, lvl = 1;
@@ -110,7 +123,11 @@ public class Program
             "Giant Spider 🕷️",
             "Iron Golem 🤖",
             "Lost Necromancer 🧝‍♂️",
-            "Ancient Dragon 🐉"};        
+            "Ancient Dragon 🐉"};
+        //op3 var
+        int coin = 0, count = 0, valX = 5, valY = 5, money = 0;
+        string[,] map0 = new string[5, 5];
+        string[,] mapDig = new string[5, 5];        
         do
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -604,6 +621,110 @@ public class Program
                         {
                             Console.WriteLine(LvlMax);
                         }                        
+                    break;
+                    case 3:
+                        for (int i = 0; i < mapDig.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < mapDig.GetLength(1); j++)
+                            {
+                                coin = rand.Next(0, 101);
+                                if (coin <= 35)
+                                {
+                                    mapDig[i, j] = Coin;
+                                    //Console.Write(mapDig[i, j]); hacks
+                                }
+                                else
+                                {
+                                    mapDig[i, j] = Fail;
+                                    //Console.Write(mapDig[i, j]); hacks
+                                }
+                            }
+                            //Console.WriteLine(""); hacks
+                        }
+                        //Console.WriteLine(""); hacks
+                        for (int i = 0; i < map0.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < map0.GetLength(1); j++)
+                            {
+                                map0[i, j] = Empty;                                
+                            }                            
+                        }                        
+                        Console.WriteLine(Attempts);
+                        do
+                        {
+                            Console.WriteLine(Column);
+                            for (int i = 0; i < map0.GetLength(0); i++)
+                            {
+                                Console.Write(i);
+                                for (int j = 0; j < map0.GetLength(1); j++)
+                                {                                    
+                                    Console.Write(map0[i, j]);
+                                }
+                                Console.WriteLine("");
+                            }
+                            do
+                            {
+                                try
+                                {
+                                    Console.WriteLine(InsertX);
+                                    valX = Int32.Parse(Console.ReadLine());
+                                    if (valX < 0 || valX > 4)
+                                    {
+                                        Console.WriteLine(InvaliVal);
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine(Error);
+                                }
+                            } while (valX < 0 || valX > 4);
+                            do
+                            {
+                                try
+                                {
+                                    Console.WriteLine(InsertY);
+                                    valY = Int32.Parse(Console.ReadLine());
+                                    if (valY < 0 || valY > 4)
+                                    {
+                                        Console.WriteLine(InvaliVal);
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine(Error);
+                                }
+                            } while (valY < 0 || valY > 4);
+                            if (mapDig[valX, valY].Contains(Coin))
+                            {
+                                coin = rand.Next(5, 51);
+                                map0[valX, valY] = Coin;
+                                mapDig[valX, valY] = Fail;
+                                Console.Write(Mine, valX, valY);
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine(Bits, coin);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                money += coin;
+                            }
+                            else
+                            {
+                                map0[valX, valY] = Fail;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine(FailMine, valX, valY);
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                            count++;
+                        } while (count < MaxAtt);
+                        count = 0;
+                        Console.WriteLine(Column);
+                        for (int i = 0; i < map0.GetLength(0); i++)
+                        {
+                            Console.Write(i);
+                            for (int j = 0; j < map0.GetLength(1); j++)
+                            {
+                                Console.Write(map0[i, j]);
+                            }
+                            Console.WriteLine("");
+                        }
                     break;                    
                 }
             }
