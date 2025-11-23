@@ -119,7 +119,11 @@ public class Program
         const string OpStore = "Select the item you wish to buy (1 - 5) (0 to exit):";
         const string ZeroExit = "0 - Exit";
         const string Bought = "You have purchased: {0} for {1} bits. Bits remaining: {2}";
-        const string NoMoney = "You do not have enough bits to purchase this item.";        
+        const string NoMoney = "You do not have enough bits to purchase this item.";
+        //op6 const 
+        const string NewPowers = "Keep training to unlock new powers!";
+        const string AtkFor = "Available attacks for level {0}:";
+        const string AllPowers = "You already know all powers, congratulations ⭐";
         //op1 var
         Random rand = new Random();
         int power = 0, hours = 0, op = -1, lvl = 1;
@@ -149,7 +153,13 @@ public class Program
             "Healing Potion ⚗️",
             "Ancient Key 🗝️",
             "Crossbow 🏹",
-            "Metal Shield 🛡️"};        
+            "Metal Shield 🛡️"};
+        //op6 var
+        string[] level1 = { "Magic Spark 💫" };
+        string[] level2 = { "Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️" };
+        string[] level3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
+        string[] level4 = { "Wave of Light ⚜️", "Storm of Wings 🐦" };
+        string[] level5 = { "Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" };
         do
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -808,6 +818,76 @@ public class Program
                                 }
                             } while (opStore < 0 || opStore > 5);
                         } while (opStore != 0);
+                    break;
+                    case 6:
+                        switch (lvl)
+                        {
+                            case 1:
+                                Console.WriteLine(AtkFor, 1);
+                                Console.WriteLine(level1[0]);
+                                Console.WriteLine(NewPowers);
+                            break;
+                            case 2:
+                                Console.WriteLine(AtkFor, 2);
+                                Console.WriteLine(level1[0]);
+                                for (int i = 0; i < level2.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level2[i]);
+                                }
+                                Console.WriteLine(NewPowers); 
+                            break;
+                            case 3:
+                                Console.WriteLine(AtkFor, 3);
+                                Console.WriteLine(level1[0]);
+                                for (int i = 0; i < level2.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level2[i]);
+                                }
+                                for (int i = 0; i < level3.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level3[i]);
+                                }
+                                Console.WriteLine(NewPowers);
+                            break;
+                            case 4:
+                                Console.WriteLine(AtkFor, 4);
+                                Console.WriteLine(level1[0]);
+                                for (int i = 0; i < level2.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level2[i]);
+                                }
+                                for (int i = 0; i < level3.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level3[i]);
+                                }
+                                for (int i = 0; i < level4.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level4[i]);
+                                }
+                                Console.WriteLine(NewPowers);
+                            break;
+                            case 5:
+                                Console.WriteLine(AtkFor, 5);
+                                Console.WriteLine(level1[0]);
+                                for (int i = 0; i < level2.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level2[i]);
+                                }
+                                for (int i = 0; i < level3.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level3[i]);
+                                }
+                                for (int i = 0; i < level4.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level4[i]);
+                                }
+                                for (int i = 0; i < level5.GetLength(0); i++)
+                                {
+                                    Console.WriteLine(level5[i]);
+                                }
+                                Console.WriteLine(AllPowers);
+                            break;
+                        }
                     break;                    
                 }
             }
