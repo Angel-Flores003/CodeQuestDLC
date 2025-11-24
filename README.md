@@ -1,16 +1,18 @@
-op = 5
+op = 4
 
-<img width="902" height="194" alt="0" src="https://github.com/user-attachments/assets/f6cba6e6-07bf-40d1-9584-14fba25dbbe0" />
+<img width="654" height="85" alt="1" src="https://github.com/user-attachments/assets/dbee3fde-4a83-4fe9-98ed-de60d5fe1c77" />
+
+<img width="754" height="86" alt="2" src="https://github.com/user-attachments/assets/d9d43a92-24c1-415d-8e48-7f35e726bcb0" />
 
 
 op = asdwas
 
-<img width="901" height="86" alt="2" src="https://github.com/user-attachments/assets/43fc1b04-d4a8-4cf2-9232-4c738468a1be" />
+<img width="832" height="85" alt="3" src="https://github.com/user-attachments/assets/5912afe8-8bc9-41d9-a5ce-dbec816d109c" />
 
 
 op = 1234
 
-<img width="897" height="85" alt="3" src="https://github.com/user-attachments/assets/740448cf-2628-4a64-9f97-bd691f3b6654" />
+<img width="830" height="85" alt="4" src="https://github.com/user-attachments/assets/ce796cf9-42c7-4f0a-bba7-1e1552d74dec" />
 
 
-Descripció: possibilitat de comprar itemps a la tenda. Si no tens suficients diners no et deixa comprar. Has d'introduïr un 0 per sortir de la tenda.
+Descripció: Mostra el teu inventari. Si no conté res t'ho diu, si conté alguna cosa et mostra el teu inventari.
