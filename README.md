@@ -1,4 +1,5 @@
 op = 2
+
 <img width="886" height="169" alt="Captura de pantalla de 2025-11-24 13-32-07" src="https://github.com/user-attachments/assets/e8e2a14e-500a-4974-8048-9fa69abc31c7" />
 
 op = asdwas
@@ -6,3 +7,6 @@ op = asdwas
 
 op = 1234
 <img width="1144" height="106" alt="Captura de pantalla de 2025-11-24 13-33-49" src="https://github.com/user-attachments/assets/7347daf0-68d3-4577-a9b1-87c207acc208" />
+
+Descripció:
+El mag lliuta contra diferents monstres i puja de nivell després de cada batalla. Si ja és nivell 5 no pujarà més de nivell.
