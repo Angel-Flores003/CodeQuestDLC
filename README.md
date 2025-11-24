@@ -6,3 +6,6 @@ op = asdwas
 
 op = 1234
 <img width="1149" height="108" alt="Captura de pantalla de 2025-11-24 12-51-37" src="https://github.com/user-attachments/assets/1824d9eb-b9bd-4265-bbdc-b7006957f51f" />
+
+Descripció:
+Chapter 1, el codi valida el nom del mag introduït per consola
