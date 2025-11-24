@@ -105,7 +105,7 @@ public class Program
         const string Column = "  0 1 2 3 4";
         const string InsertX = "Insert the x axis:";
         const string InsertY = "Insert the y axis:";
-        const string InvaliVal = "Invalid axis. Please enter a value between 0 and 4";
+        const string InvaliVal = "Invalid axis. Please enter a value between 0 and 4.";
         const string Mine = "You mine at position [{0}][{1}] and you get ";
         const string Bits = "{0} bits";
         const string FailMine = "You mine at position [{0}][{1}] but found nothing.";
@@ -120,6 +120,7 @@ public class Program
         const string ZeroExit = "0 - Exit";
         const string Bought = "You have purchased: {0} for {1} bits. Bits remaining: {2}";
         const string NoMoney = "You do not have enough bits to purchase this item.";
+        const string ErrorInput = "Invalid Input, please enter a number between 0 and 5";
         //op6 const 
         const string NewPowers = "Keep training to unlock new powers!";
         const string AtkFor = "Available attacks for level {0}:";
@@ -242,6 +243,7 @@ public class Program
                     case 1:                        
                         Console.Write(InputName);
                         user = Console.ReadLine();
+                        user = user.Trim();
                         user = char.ToUpper(user[0]) + user.Substring(1).ToLower();//convierte la primnera en mayus y el resto en minus
                         power = 0;
                         for (int i = 1; i < MaxDay + 1; i++)
@@ -731,7 +733,8 @@ public class Program
                                 }
                                 catch (FormatException)
                                 {
-                                    Console.WriteLine(Error);
+                                    Console.WriteLine(InvaliVal);
+                                    valX = 5;
                                 }
                             } while (valX < 0 || valX > 4);
                             do
@@ -747,7 +750,8 @@ public class Program
                                 }
                                 catch (FormatException)
                                 {
-                                    Console.WriteLine(Error);
+                                    Console.WriteLine(InvaliVal);
+                                    valY = 5;
                                 }
                             } while (valY < 0 || valY > 4);
                             if (mapDig[valX, valY].Contains(Coin))
@@ -809,36 +813,43 @@ public class Program
                             }
                             Console.WriteLine(ZeroExit);
                             do
-                            {
-                                Console.WriteLine(OpStore);
-                                opStore = Int32.Parse(Console.ReadLine());
+                            {                                
                                 try
                                 {
-                                    if (opStore != 0)
+                                    Console.WriteLine(OpStore);
+                                    opStore = Int32.Parse(Console.ReadLine());
+                                    if (opStore != 0 )
                                     {
-                                        if (money > price[opStore - 1])
+                                        if (opStore > 0 && opStore < 6)
                                         {
-                                            money -= price[opStore - 1];
-                                            Console.WriteLine(Bought, store[opStore - 1], price[opStore - 1], money);
-                                            tempInven[0] = store[opStore - 1];
-                                            if (inventory[0].Equals(""))
+                                            if (money > price[opStore - 1])
                                             {
-                                                inventory[0] = tempInven[0];
+                                                money -= price[opStore - 1];
+                                                Console.WriteLine(Bought, store[opStore - 1], price[opStore - 1], money);
+                                                tempInven[0] = store[opStore - 1];
+                                                if (inventory[0].Equals(""))
+                                                {
+                                                    inventory[0] = tempInven[0];
+                                                }
+                                                else
+                                                {
+                                                    inventory = inventory.Concat(tempInven).ToArray();
+                                                }
                                             }
                                             else
                                             {
-                                                inventory = inventory.Concat(tempInven).ToArray();
+                                                Console.WriteLine(NoMoney);
                                             }
                                         }
                                         else
                                         {
-                                            Console.WriteLine(NoMoney);
+                                            Console.WriteLine(ErrorInput);
                                         }
                                     }
                                 }
                                 catch (FormatException)
                                 {
-                                    Console.WriteLine(Error);
+                                    Console.WriteLine(ErrorInput);
                                 }
                             } while (opStore < 0 || opStore > 5);
                         } while (opStore != 0);
@@ -970,6 +981,9 @@ public class Program
                         {
                             Console.WriteLine(Error2);
                         }
+                    break;
+                    default:
+                        Console.WriteLine(Error);
                     break;
                 }
             }
